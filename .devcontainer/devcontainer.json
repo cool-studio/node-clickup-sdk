@@ -1,0 +1,5 @@
+{
+    "name": "node-clickup-sdk",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:18",
+    "postStartCommand": "npm i -g yarn"
+}
