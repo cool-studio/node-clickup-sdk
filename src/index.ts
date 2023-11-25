@@ -1,11 +1,15 @@
 import Axios, { AxiosInstance } from "axios";
 import { TaskService } from "./Service/TaskService";
+import { AuthService } from "./Service/AuthService";
+import { CommentService } from "./Service/CommentService";
 
 class ClickUp {
     private axios: AxiosInstance;
     private token: string;
 
     public tasks: TaskService;
+    public auth: AuthService;
+    public comments: CommentService;
 
     constructor (PersonalAccessToken: string)
     {
@@ -19,6 +23,8 @@ class ClickUp {
         });
 
         this.tasks = new TaskService(this.axios);
+        this.auth = new AuthService(this.axios);
+        this.comments = new CommentService(this.axios);
     }
 }
 

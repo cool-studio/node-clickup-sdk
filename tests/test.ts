@@ -1,7 +1,7 @@
 import ClickUp from "../src";
-import DotEnv from "dotenv";
+import { config } from "dotenv";
 
-DotEnv.config();
+config();
 
 if (typeof process.env.ClickUpPAT !== "string") {
     process.exit();
@@ -9,10 +9,20 @@ if (typeof process.env.ClickUpPAT !== "string") {
 
 const clickup = new ClickUp(process.env.ClickUpPAT);
 
+console.log(process.env.ClickUpPAT);
+
 (async () => {
-    const response = await clickup.tasks.CreateTask("900501571775", {
+    const TaskResponse = await clickup.tasks.CreateTask("900501571775", {
         name: "This is a test"
     });
 
-    console.log(response.data);
+    const UserResponse = await clickup.auth.GetAuthorizedUser();
+    
+    if (TaskResponse.data.id) {
+        const CommentResponse = await clickup.comments.CreateComment(TaskResponse.data.id, {
+            comment_text: "This is a test comment",
+            assignee: null,
+            notify_all: false
+        });
+    }
 })();

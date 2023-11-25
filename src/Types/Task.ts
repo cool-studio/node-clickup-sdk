@@ -1,3 +1,5 @@
+import { User } from "./Authorization"
+
 interface CustomFieldRequest {
     id: string,
     value: number | string
@@ -28,13 +30,6 @@ interface Status {
     color: string,
     orderindex: number,
     type: string
-}
-
-interface Creator {
-    id: number,
-    username: string,
-    color: string,
-    profilePicture: string,
 }
 
 interface TypeConfig {
@@ -101,7 +96,7 @@ export interface CreateTaskResponse {
     date_created?: string,
     date_updated?: string,
     date_closed?: string | null,
-    creator?: Creator,
+    creator?: User,
     assignees?: string[],
     checklists?: string[],
     tags?: string[],
